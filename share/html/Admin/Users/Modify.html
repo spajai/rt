@@ -232,6 +232,7 @@
 % }
 </form>
 
+<& /Elements/UserRelatedData, UserObj => $UserObj &>
 <%INIT>
 
 my $UserObj = RT::User->new($session{'CurrentUser'});
