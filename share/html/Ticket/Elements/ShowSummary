@@ -91,6 +91,11 @@
 % $m->callback( %ARGS, CallbackName => 'AfterDates' );
 % my (@extra);
 % push @extra, titleright_raw => '<a href="'. RT->Config->Get('WebPath'). '/Ticket/Graphs/index.html?id='.$Ticket->id.'">'.loc('Graph').'</a>' unless RT->Config->Get('DisableGraphViz');
+
+<& /Ticket/Elements/ShowLinkedQueues,
+    TicketObj => $Ticket,
+&>
+
 <& /Ticket/Elements/ShowAssets, Ticket => $Ticket &>
 % $m->callback( %ARGS, CallbackName => 'LinksExtra', extra => \@extra );
     <&| /Widgets/TitleBox, title => loc('Links'),

@@ -134,6 +134,26 @@ sub DisplayTypes {
   values %DISPLAY_AS
 }
 
+=head2 LinkTypeConversion
+
+Returns a hash of the standard link types from %DIRMAP with each Base and Target as a key
+value pair. This is useful in cases where the link type should be interpreted in reverse.
+For example, when querying for all the 'RefersTo' links on a ticket, if the query is in reference
+to the linked ticket, this function is not needed. But, if the query is in reference to the
+ticket itself, then the link type will need to be reversed and 'ReferredToBy' will need to be
+used instead.
+
+=cut
+
+sub LinkTypeConversion {
+    my %links;
+    foreach my $link ( keys %DIRMAP ) {
+        $links{ $DIRMAP{ $link }->{ 'Base' } } = $DIRMAP{ $link }->{ 'Target' };
+        $links{ $DIRMAP{ $link }->{ 'Target' } } = $DIRMAP{ $link }->{ 'Base' };
+    }
+    return %links;
+}
+
 =head1 METHODS
 
 =head2 Create PARAMHASH
