@@ -1681,6 +1681,37 @@ to the Article with that name.
 
 Set($WikiImplicitLinks, 0);
 
+=item C<%LinkedQueuePortlets>
+
+If %LinkedQueuePortlets is set, new portlets will display on tickets.
+Each portlet lists all the linked tickets grouped by queue, and based
+on the indicated link type. Acceptable link types include, 'DependsOn',
+'DependedOnBy', 'HasMember' (children), 'MemberOf' (parents), 'RefersTo',
+and 'ReferredToBy'. Additionally, the type, 'All', which lists all
+linked tickets by queue, is accepted. See example below:
+
+Set( %LinkedQueuePortlets, (
+    General => [ 'HasMember', 'MemberOf', 'RefersTo' ],
+    TestQueue => [ 'All' ],
+));
+
+=cut
+
+Set( %LinkedQueuePortlets, () );
+
+=item C<$LinkedQueuesPortletFormat>
+
+$LinkedQueuesPortletFormat is the default format for displaying tickets
+in Linked queue portlets ( LinkedQueuePortlets must be enabled ).
+
+=cut
+
+Set( $LinkedQueuesPortletFormat,
+        q{'<b><a href="__WebPath__/Ticket/Display.html?id=__id__">__id__</a></b>/TITLE:#',}.
+        q{'<b><a href="__WebPath__/Ticket/Display.html?id=__id__">__Subject__</a></b>/TITLE:Subject',}.
+        q{Status}
+);
+
 =item C<$PreviewScripMessages>
 
 Set C<$PreviewScripMessages> to 1 if the scrips preview on the ticket
